@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.29424.173
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Huemaker", "Huemaker\Huemaker.csproj", "{98C10D7C-D4D5-4ED9-AA25-EFC8EFB14D4A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorDimensions", "ColorDimensions\ColorDimensions.csproj", "{70D87E35-32CE-48A6-B333-8FF61EAEC6D4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{98C10D7C-D4D5-4ED9-AA25-EFC8EFB14D4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98C10D7C-D4D5-4ED9-AA25-EFC8EFB14D4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98C10D7C-D4D5-4ED9-AA25-EFC8EFB14D4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70D87E35-32CE-48A6-B333-8FF61EAEC6D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70D87E35-32CE-48A6-B333-8FF61EAEC6D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70D87E35-32CE-48A6-B333-8FF61EAEC6D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70D87E35-32CE-48A6-B333-8FF61EAEC6D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
