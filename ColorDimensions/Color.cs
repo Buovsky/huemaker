@@ -156,9 +156,10 @@ namespace ColorDimensions
 
             // convert HSL to HSV
             // saturation helper (since hsl is still 3d, has different model - doubled for light and shades)
-            float s = saturation * (lightness < 0.5f ? lightness : 1 - lightness);
-            saturation = 2 * s / (lightness + s);
-            float value = lightness + saturation;
+            lightness *= 2;
+            saturation *= (lightness <= 1 ? lightness : 2 - lightness);
+            float value = (lightness + saturation) / 2;
+            saturation = (2 * saturation) / (lightness + saturation);
 
             return new HSV(hue % 360, saturation > 1 ? 1 : saturation, value > 1 ? 1 : value);
         }
