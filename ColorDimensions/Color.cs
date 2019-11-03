@@ -9,13 +9,13 @@ namespace ColorDimensions
 
     class HSV
     {
-        public int hue;
+        public float hue;
         public float saturation;
         public float value;
 
-        public HSV(int h, float s, float v)
+        public HSV(float h, float s, float v)
         {
-            if (h >= 0 && h <= 359)
+            if (h >= 0 && h <= 359.99f)
             {
                 hue = h;
             }
@@ -47,46 +47,46 @@ namespace ColorDimensions
         {
             // algorithm based on
             // https://en.wikipedia.org/wiki/HSL_and_HSV#HSV_to_RGB
+            // https://www.rapidtables.com/convert/color/hsv-to-rgb.html
             // c = chroma
             float c = value * saturation;
 
             // h = chroma prime
-            float h = hue / 60;
-            float x = c * (1 - ((h % 2) - 1));
+            float x = c * (1 - Math.Abs((hue / 60) % 2 - 1));
 
             float r, g, b;
 
-            if (h >= 0 && h <= 1)
+            if (hue >= 0 && hue <= 60)
             {
                 r = c;
                 g = x;
                 b = 0;
             } 
-            else if (h > 1 && h <= 2)
+            else if (hue > 60 && hue <= 120)
             {
                 r = x;
                 g = c;
                 b = 0;
             }
-            else if (h > 2 && h <= 3)
+            else if (hue > 120 && hue <= 180)
             {
                 r = 0;
                 g = c;
                 b = x;
             }
-            else if (h > 3 && h <= 4)
+            else if (hue > 180 && hue <= 240)
             {
                 r = 0;
                 g = x;
                 b = c;
             }
-            else if (h > 4 && h <= 5)
+            else if (hue > 240 && hue <= 300)
             {
                 r = x;
                 g = 0;
                 b = c;
             }
-            else if (h > 5 && h <= 6)
+            else if (hue > 300 && hue <= 360)
             {
                 r = c;
                 g = 0;
@@ -101,7 +101,7 @@ namespace ColorDimensions
 
             float m = value - c;
 
-            return new RGB(Convert.ToInt32((r + m) * 100), Convert.ToInt32((g + m) * 100), Convert.ToInt32((b + m) * 100));
+            return new RGB(Convert.ToInt32((r + m) * 255), Convert.ToInt32((g + m) * 255), Convert.ToInt32((b + m) * 255));
         }
 
         public override string ToString()
@@ -150,14 +150,13 @@ namespace ColorDimensions
         {
             // get HSL
             System.Drawing.Color col = System.Drawing.Color.FromArgb(red, green, blue);
-            int hue = Convert.ToInt32(col.GetHue());
-            float saturation = (float)Math.Round(Convert.ToDouble(col.GetSaturation()), 2);
+            float hue = col.GetHue();
+            float saturation = col.GetSaturation();
+            float lightness = col.GetBrightness();
 
             // convert HSL to HSV
-            float lightness = (float)Math.Round(Convert.ToDouble(col.GetBrightness()), 2);
-
             // saturation helper (since hsl is still 3d, has different model - doubled for light and shades)
-            float s = saturation * (lightness < .5 ? lightness : 1 - lightness);
+            float s = saturation * (lightness < 0.5f ? lightness : 1 - lightness);
             saturation = 2 * s / (lightness + s);
             float value = lightness + saturation;
 
